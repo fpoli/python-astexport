@@ -21,6 +21,7 @@ setup(
     description = description,
     author = "Federico Poli",
     author_email = "federpoli@gmail.com",
+    url = "https://github.com/fpoli/python-astexport",
     license = "GPLv3",
     packages = ["astexport"],
     entry_points = {
