@@ -21,10 +21,13 @@ setup(
     description = description,
     author = "Federico Poli",
     author_email = "federpoli@gmail.com",
-    license = "GPLv3"
+    license = "GPLv3",
     packages = ["astexport"],
     entry_points = {
         "console_scripts": ["astexport = astexport.cli:main"]
     },
     long_description = long_descr,
+    install_requires = [
+        "meta",
+    ]
 )
