@@ -28,8 +28,19 @@ setup(
     packages = find_packages(exclude=["tests"]),
 
     entry_points = {
-        "console_scripts": ["astexport = astexport.cli:main"]
+        "console_scripts": [
+            "astexport = astexport.cli:main"
+        ]
     },
 
-    install_requires = ["meta"],
+    install_requires = [
+        "meta"
+    ],
+    extras_requires = {
+        "dev": [
+            "twine",
+            "nose == 1.3.3",
+            "pep8 == 1.4.6"
+        ]
+    }
 )
