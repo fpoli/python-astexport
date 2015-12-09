@@ -6,7 +6,7 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-version = "0.1.0"
+version = "0.1.1"
 
 description = "Python command line application to export Python AST as Json."
 
