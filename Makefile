@@ -5,7 +5,7 @@ test:
 linter:
 	pep8 --ignore=E251 .
 
-dist-upload:
+dist-upload: linter test
 	python setup.py sdist bdist_wheel
 	twine upload dist/*
 
