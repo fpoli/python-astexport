@@ -5,19 +5,22 @@ import unittest
 import ast
 from meta.asttools import cmp_ast, str_ast
 from astexport.parse import parse
-from test import generateTests, TestIO
+from test import TestIO
 
 
-@generateTests
 class TestParse(unittest.TestCase):
 
-    def build_test(self, test):
-        result = parse(test.input)
-        expected = ast.fix_missing_locations(test.output)
-        self.assertTrue(
-            cmp_ast(result, expected),
-            "Result:\n" + str_ast(result) + "\nExpected:\n" + str_ast(expected)
-        )
+    def test_parse(self):
+        for test in self.tests:
+            result = parse(test.input)
+            expected = ast.fix_missing_locations(test.output)
+            self.assertTrue(
+                cmp_ast(result, expected),
+                "Result:\n{}\nExpected:\n{}".format(
+                    str_ast(result),
+                    str_ast(expected)
+                )
+            )
 
     tests = [
         TestIO(

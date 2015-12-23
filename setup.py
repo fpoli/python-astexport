@@ -19,7 +19,7 @@ setup(
 
     description = description,
     long_description = long_descr,
-    license = "GPLv3",
+    license = "MIT",
     url = "https://github.com/fpoli/python-astexport",
 
     author = "Federico Poli",
@@ -42,5 +42,17 @@ setup(
             "nose == 1.3.3",
             "pep8 == 1.4.6"
         ]
-    }
+    },
+
+    classifiers = [
+        "Development Status :: 4 - Beta",
+        "Environment :: Console",
+        "Intended Audience :: Developers",
+        "Topic :: Software Development :: Compilers",
+        "Topic :: Software Development :: Disassemblers",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.7"
+    ]
 )

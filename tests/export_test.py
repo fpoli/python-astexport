@@ -5,16 +5,16 @@ import unittest
 import ast
 import json
 from astexport.export import export_json
-from test import generateTests, TestIO
+from test import TestIO
 
 
-@generateTests
 class TestExportJson(unittest.TestCase):
 
-    def build_test(self, test):
-        result = json.loads(export_json(test.input))
-        expected = test.output
-        self.assertEqual(result, expected)
+    def test_export_json(self):
+        for test in self.tests:
+            result = json.loads(export_json(test.input))
+            expected = test.output
+            self.assertEqual(result, expected)
 
     tests = [
         TestIO(
