@@ -27,4 +27,5 @@ License
 -------
 
 Copyright (c) 2015, Federico Poli <federpoli@gmail.com>
+
 Released under the MIT license.
