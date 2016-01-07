@@ -5,5 +5,5 @@
 """
 
 
-from .cli import main
+from astexport.cli import main
 main()

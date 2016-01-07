@@ -19,7 +19,8 @@ def export_dict(tree):
     }
 
     for name in tree.__dict__:
-        if name is "ast_type":
+        # Check conflicts (we use ast_type to store class_name)
+        if name == "ast_type":
             raise Exception(
                 ("Unexpected attribute '{name}' in class {class_name}").format(
                     name = name,

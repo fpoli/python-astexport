@@ -6,7 +6,7 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-version = "0.2.0"
+version = "0.2.1"
 
 description = "Python command line application to export Python AST as Json."
 
@@ -34,10 +34,10 @@ setup(
     },
 
     install_requires = [
-        "meta"
     ],
     extras_require = {
         "dev": [
+            "meta",
             "twine",
             "nose == 1.3.3",
             "pep8 == 1.4.6"
