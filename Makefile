@@ -1,5 +1,5 @@
 test:
-	nosetests-3.4
+	python3.5 -m nose
 
 linter:
 	pep8 --ignore=E251 .
