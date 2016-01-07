@@ -33,6 +33,8 @@ def export_dict(tree):
         val = getattr(tree, name)
         if isinstance(val, ast.AST):
             args[name] = export_dict(val)
+        elif val is True or val is False or val is None:
+            args[name] = str(val)
         elif isinstance(val, str):
             args[name] = val
         elif isinstance(val, int) and name in ("lineno", "col_offset"):
@@ -43,9 +45,6 @@ def export_dict(tree):
             args[name] = {"ast_type": "float", "n": val}
         elif isinstance(val, complex):
             args[name] = {"ast_type": "complex", "n": val.real, "i": val.imag}
-        elif isinstance(val, type(None)):
-            #args[name] = { "ast_type": "NoneType" }
-            pass
         elif isinstance(val, list) or isinstance(val, tuple):
             args[name] = [export_dict(x) for x in val]
         else:
