@@ -16,46 +16,59 @@ def export_json(tree, pretty_print=False):
 
 def export_dict(tree):
     assert(isinstance(tree, ast.AST))
-    class_name = tree.__class__.__name__
-    args = {
-        "ast_type": class_name
-    }
+    return DictExportVisitor().visit(tree)
 
-    for name in tree.__dict__:
-        # Check conflicts (we use ast_type to store class_name)
-        if name == "ast_type":
-            raise Exception(
-                ("Unexpected attribute '{name}' in class {class_name}").format(
-                    name = name,
-                    class_name = class_name
-                )
+
+class DictExportVisitor:
+    ast_type_field = "ast_type"
+
+    def visit(self, node):
+        node_type = node.__class__.__name__
+        meth = getattr(self, "visit_" + node_type, self.default_visit)
+        return meth(node)
+
+    def default_visit(self, node):
+        node_type = node.__class__.__name__
+        # Add node type
+        args = {
+            self.ast_type_field: node_type
+        }
+        # Visit fields
+        for field in node._fields:
+            assert field != self.ast_type_field
+            meth = getattr(
+                self, "visit_field_" + node_type + "_" + field,
+                self.default_visit_element
             )
-        val = getattr(tree, name)
+            args[field] = meth(getattr(node, field))
+        # Visit attributes
+        for attr in node._attributes:
+            assert attr != self.ast_type_field
+            meth = getattr(
+                self, "visit_attribute_" + node_type + "_" + attr,
+                self.default_visit_element
+            )
+            # Use None as default when lineno/col_offset are not set
+            args[attr] = meth(getattr(node, attr, None))
+        return args
+
+    def default_visit_element(self, val):
         if isinstance(val, ast.AST):
-            args[name] = export_dict(val)
-        elif val is True or val is False or val is None:
-            args[name] = str(val)
-        elif isinstance(val, str):
-            args[name] = val
-        elif isinstance(val, int) and name in ("lineno", "col_offset"):
-            args[name] = val
-        elif isinstance(val, int):
-            args[name] = {"ast_type": "int", "n": val}
-        elif isinstance(val, float):
-            args[name] = {"ast_type": "float", "n": val}
-        elif isinstance(val, complex):
-            args[name] = {"ast_type": "complex", "n": val.real, "i": val.imag}
+            return self.visit(val)
         elif isinstance(val, list) or isinstance(val, tuple):
-            args[name] = [export_dict(x) for x in val]
+            return [self.visit(x) for x in val]
         else:
-            raise Exception(
-                ("Attribute '{name}' of class {class_name} "
-                 "not recognized, type is: {type}, value is: {value}").format(
-                    name = name,
-                    class_name = class_name,
-                    type = type(val).__name__,
-                    value = val
-                )
-            )
+            return val
 
-    return args
+    # Special visitors
+
+    def visit_field_NameConstant_value(self, val):
+        return str(val)
+
+    def visit_field_Num_n(self, val):
+        if isinstance(val, int):
+            return {"ast_type": "int", "n": val}
+        elif isinstance(val, float):
+            return {"ast_type": "float", "n": val}
+        elif isinstance(val, complex):
+            return {"ast_type": "complex", "n": val.real, "i": val.imag}
