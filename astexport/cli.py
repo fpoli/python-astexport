@@ -6,8 +6,7 @@ from .parse import parse
 from .export import export_json
 
 
-def main():
-    """Read source from stdin, parse and export the AST as JSON"""
+def create_parser():
     parser = argparse.ArgumentParser(
         prog="astexport",
         description="Python source code in, JSON AST out."
@@ -22,6 +21,12 @@ def main():
         action="store_true",
         help="print indented JSON"
     )
+    return parser
+
+
+def main():
+    """Read source from stdin, parse and export the AST as JSON"""
+    parser = create_parser()
     args = parser.parse_args()
     source = "".join(fileinput.input(args.input))
     tree = parse(source)
