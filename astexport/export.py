@@ -1,9 +1,7 @@
-#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 import ast
 import json
-import types
 
 
 def export_json(tree):
@@ -36,13 +34,11 @@ def export_dict(tree):
             args[name] = val
         elif isinstance(val, int):
             args[name] = {"ast_type": "int", "n": val}
-        elif isinstance(val, long):
-            args[name] = {"ast_type": "long", "n": val}
         elif isinstance(val, float):
             args[name] = {"ast_type": "float", "n": val}
         elif isinstance(val, complex):
             args[name] = {"ast_type": "complex", "n": val.real, "i": val.imag}
-        elif isinstance(val, types.NoneType):
+        elif isinstance(val, type(None)):
             #args[name] = { "ast_type": "NoneType" }
             pass
         elif isinstance(val, list) or isinstance(val, tuple):

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import fileinput
-from astexport.parse import parse
-from astexport.export import export_json
+from .parse import parse
+from .export import export_json
 
 
 def main():

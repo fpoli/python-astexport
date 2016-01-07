@@ -1,10 +1,10 @@
 python-astexport
 ================
 
-Python command line application to export Python 2.7 AST as Json.
-
 .. image:: https://travis-ci.org/fpoli/python-astexport.svg?branch=master
     :target: https://travis-ci.org/fpoli/python-astexport
+
+Python command line application to export Python 3 AST as Json.
 
 
 Installation
