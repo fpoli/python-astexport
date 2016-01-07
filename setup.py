@@ -10,12 +10,16 @@ version = "1.1.0"
 
 description = "Python command line application to export Python AST as Json."
 
+main_ns = {}
+with open("astexport/version.py") as ver_file:
+    exec(ver_file.read(), main_ns)
+
 with open(path.join(here, "README.rst"), encoding="utf-8") as f:
     long_descr = f.read()
 
 setup(
     name = "astexport",
-    version = version,
+    version = main_ns['__version__'],
 
     description = description,
     long_description = long_descr,

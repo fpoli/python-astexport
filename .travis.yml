@@ -9,3 +9,5 @@ before_script:
 script:
   - make linter
   - nosetests
+  - python -m astexport --help
+  - echo "x = 5" | python -m astexport --pretty

@@ -4,6 +4,9 @@ test:
 install:
 	python3.5 -m pip install . --upgrade
 
+run-help:
+	python3.5 -m astexport --help
+
 linter:
 	pep8 --ignore=E251 .
 
