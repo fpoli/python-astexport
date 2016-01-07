@@ -6,6 +6,8 @@ python-astexport
 
 Python command line application to export Python 3 AST as Json.
 
+Python 2.7 AST was used up to version 0.2.1 of this library.
+
 
 Installation
 ------------

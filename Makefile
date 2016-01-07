@@ -1,5 +1,5 @@
 test:
-	nosetests
+	nosetests-3.4
 
 linter:
 	pep8 --ignore=E251 .
