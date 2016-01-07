@@ -106,9 +106,7 @@ class TestExportJson(unittest.TestCase):
                                 "lineno": 1
                             },
                             "keywords": [],
-                            "kwargs": None,
-                            "lineno": 1,
-                            "starargs": None
+                            "lineno": 1
                         }
                     }
                 ]

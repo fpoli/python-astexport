@@ -37,7 +37,6 @@ setup(
     ],
     extras_require = {
         "dev": [
-            "meta",
             "twine",
             "nose == 1.3.3",
             "pep8 == 1.4.6"

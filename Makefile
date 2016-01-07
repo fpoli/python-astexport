@@ -1,6 +1,9 @@
 test:
 	python3.5 -m nose
 
+install:
+	python3.5 -m pip install . --upgrade
+
 linter:
 	pep8 --ignore=E251 .
 

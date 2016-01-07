@@ -3,7 +3,6 @@
 
 import unittest
 import ast
-from meta.asttools import cmp_ast, str_ast
 from astexport.parse import parse
 from test import TestIO
 
@@ -11,15 +10,13 @@ from test import TestIO
 class TestParse(unittest.TestCase):
 
     def test_parse(self):
-        for test in self.tests:
+        for i, test in enumerate(self.tests):
             result = parse(test.input)
             expected = ast.fix_missing_locations(test.output)
-            self.assertTrue(
-                cmp_ast(result, expected),
-                "Result:\n{}\nExpected:\n{}".format(
-                    str_ast(result),
-                    str_ast(expected)
-                )
+            self.assertEqual(
+                ast.dump(result, include_attributes=True),
+                ast.dump(expected, include_attributes=True),
+                "Test case {}".format(i)
             )
 
     tests = [
@@ -34,7 +31,10 @@ class TestParse(unittest.TestCase):
                                 id = "x"
                             )
                         ],
-                        value = ast.Num(n = 5)
+                        value = ast.Num(
+                            n = 5,
+                            col_offset=4
+                        )
                     )
                 ]
             )
