@@ -31,21 +31,21 @@ class TestExportJson(unittest.TestCase):
                 ]
             ),
             output = {
-                u"ast_type": u"Module",
-                u"body": [{
-                    u"ast_type": u"Assign",
-                    u"targets": [{
-                        u"ast_type": u"Name",
-                        u"ctx": {
-                            u"ast_type": u"Store"
+                "ast_type": "Module",
+                "body": [{
+                    "ast_type": "Assign",
+                    "targets": [{
+                        "ast_type": "Name",
+                        "ctx": {
+                            "ast_type": "Store"
                         },
-                        u"id": u"x"
+                        "id": "x"
                     }],
-                    u"value": {
-                        u"ast_type": u"Num",
-                        u"n": {
-                            u"ast_type": u"int",
-                            u"n": 5
+                    "value": {
+                        "ast_type": "Num",
+                        "n": {
+                            "ast_type": "int",
+                            "n": 5
                         }
                     }
                 }]
