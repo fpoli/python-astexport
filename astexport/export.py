@@ -4,9 +4,14 @@ import ast
 import json
 
 
-def export_json(tree):
+def export_json(tree, pretty_print=False):
     assert(isinstance(tree, ast.AST))
-    return json.dumps(export_dict(tree), sort_keys=True)
+    return json.dumps(
+        export_dict(tree),
+        indent=4 if pretty_print else None,
+        sort_keys=True,
+        separators=(",", ": ") if pretty_print else (",", ":")
+    )
 
 
 def export_dict(tree):

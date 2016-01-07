@@ -4,7 +4,7 @@ python-astexport
 .. image:: https://travis-ci.org/fpoli/python-astexport.svg?branch=master
     :target: https://travis-ci.org/fpoli/python-astexport
 
-Python command line application to export Python 3 AST as Json.
+Python command line application to export Python 3 AST as JSON.
 
 Python 2.7 AST was used up to version 0.2.1 of this library.
 
@@ -23,6 +23,10 @@ Usage
 .. code-block:: bash
 
     $ astexport < example.py > ast.json
+
+.. code-block:: bash
+
+    $ astexport --help
 
 
 License
