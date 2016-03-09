@@ -11,13 +11,13 @@ class TestParse(unittest.TestCase):
 
     def test_parse(self):
         for i, test in enumerate(self.tests):
-            result = parse(test.input)
-            expected = ast.fix_missing_locations(test.output)
-            self.assertEqual(
-                ast.dump(result, include_attributes=True),
-                ast.dump(expected, include_attributes=True),
-                "Test case {}".format(i)
-            )
+            with self.subTest(test=i):
+                result = parse(test.input)
+                expected = ast.fix_missing_locations(test.output)
+                self.assertEqual(
+                    ast.dump(result, include_attributes=True),
+                    ast.dump(expected, include_attributes=True)
+                )
 
     tests = [
         TestIO(
@@ -60,6 +60,18 @@ class TestParse(unittest.TestCase):
                             starargs = None,
                             kwargs = None
                         )
+                    )
+                ]
+            )
+        ),
+        TestIO(
+            input = "global x",
+            output = ast.Module(
+                body = [
+                    ast.Global(
+                        names = ['x'],
+                        lineno = 1,
+                        col_offset = 0
                     )
                 ]
             )

@@ -12,9 +12,10 @@ class TestExportJson(unittest.TestCase):
 
     def test_export_json(self):
         for i, test in enumerate(self.tests):
-            result = json.loads(export_json(test.input))
-            expected = test.output
-            self.assertEqual(result, expected, "Test case {}".format(i))
+            with self.subTest(test=i):
+                result = json.loads(export_json(test.input))
+                expected = test.output
+                self.assertEqual(result, expected)
 
     tests = [
         TestIO(
@@ -137,6 +138,28 @@ class TestExportJson(unittest.TestCase):
                 "col_offset": None,
                 "lineno": None,
                 "value": "False"
+            }
+        ),
+        TestIO(
+            input = ast.Module(
+                body = [
+                    ast.Global(
+                        names = ['x'],
+                        lineno = 1,
+                        col_offset = 0
+                    )
+                ]
+            ),
+            output = {
+                'body': [
+                    {
+                        'lineno': 1,
+                        'col_offset': 0,
+                        'ast_type': 'Global',
+                        'names': ['x']
+                    }
+                ],
+                'ast_type': 'Module'
             }
         )
     ]

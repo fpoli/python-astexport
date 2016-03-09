@@ -6,8 +6,6 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-version = "1.1.0"
-
 description = "Python command line application to export Python AST as Json."
 
 main_ns = {}

@@ -60,6 +60,9 @@ class DictExportVisitor:
 
     # Special visitors
 
+    def visit_str(self, val):
+        return str(val)
+
     def visit_field_NameConstant_value(self, val):
         return str(val)
 
