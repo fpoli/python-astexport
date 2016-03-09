@@ -144,22 +144,81 @@ class TestExportJson(unittest.TestCase):
             input = ast.Module(
                 body = [
                     ast.Global(
-                        names = ['x'],
+                        names = ["x"],
                         lineno = 1,
                         col_offset = 0
                     )
                 ]
             ),
             output = {
-                'body': [
+                "body": [
                     {
-                        'lineno': 1,
-                        'col_offset': 0,
-                        'ast_type': 'Global',
-                        'names': ['x']
+                        "lineno": 1,
+                        "col_offset": 0,
+                        "ast_type": "Global",
+                        "names": ["x"]
                     }
                 ],
-                'ast_type': 'Module'
+                "ast_type": "Module"
+            }
+        ),
+        TestIO(
+            input = ast.FunctionDef(
+                name = "function",
+                args = ast.arguments(
+                    args = [],
+                    vararg = None,
+                    kwonlyargs = [
+                        ast.arg(
+                            arg = "x",
+                            annotation = None,
+                            lineno = 1,
+                            col_offset = 16
+                        )
+                    ],
+                    kw_defaults = [None],
+                    kwarg = None,
+                    defaults = []
+                ),
+                body = [
+                    ast.Pass(lineno = 1, col_offset = 20)
+                ],
+                decorator_list = [],
+                returns = None,
+                lineno = 1,
+                col_offset = 0
+            ),
+            output = {
+                "args": {
+                    "args": [],
+                    "ast_type": "arguments",
+                    "defaults": [],
+                    "kw_defaults": [None],
+                    "kwarg": None,
+                    "kwonlyargs": [
+                        {
+                            "annotation": None,
+                            "arg": "x",
+                            "ast_type": "arg",
+                            "col_offset": 16,
+                            "lineno": 1
+                        }
+                    ],
+                    "vararg": None
+                },
+                "ast_type": "FunctionDef",
+                "body": [
+                    {
+                        "ast_type": "Pass",
+                        "col_offset": 20,
+                        "lineno": 1
+                    }
+                ],
+                "col_offset": 0,
+                "decorator_list": [],
+                "lineno": 1,
+                "name": "function",
+                "returns": None
             }
         )
     ]

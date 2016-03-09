@@ -69,7 +69,39 @@ class TestParse(unittest.TestCase):
             output = ast.Module(
                 body = [
                     ast.Global(
-                        names = ['x'],
+                        names = ["x"],
+                        lineno = 1,
+                        col_offset = 0
+                    )
+                ]
+            )
+        ),
+        TestIO(
+            input = "def function(*, x): pass",
+            output = ast.Module(
+                body = [
+                    ast.FunctionDef(
+                        name = "function",
+                        args = ast.arguments(
+                            args = [],
+                            vararg = None,
+                            kwonlyargs = [
+                                ast.arg(
+                                    arg = "x",
+                                    annotation = None,
+                                    lineno = 1,
+                                    col_offset = 16
+                                )
+                            ],
+                            kw_defaults = [None],
+                            kwarg = None,
+                            defaults = []
+                        ),
+                        body = [
+                            ast.Pass(lineno = 1, col_offset = 20)
+                        ],
+                        decorator_list = [],
+                        returns = None,
                         lineno = 1,
                         col_offset = 0
                     )
