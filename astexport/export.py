@@ -36,7 +36,7 @@ class DictExportVisitor:
             assert field != self.ast_type_field
             meth = getattr(
                 self, "visit_field_" + node_type + "_" + field,
-                self.default_visit_element
+                self.default_visit_field
             )
             args[field] = meth(getattr(node, field))
         # Visit attributes
@@ -44,13 +44,13 @@ class DictExportVisitor:
             assert attr != self.ast_type_field
             meth = getattr(
                 self, "visit_attribute_" + node_type + "_" + attr,
-                self.default_visit_element
+                self.default_visit_field
             )
             # Use None as default when lineno/col_offset are not set
             args[attr] = meth(getattr(node, attr, None))
         return args
 
-    def default_visit_element(self, val):
+    def default_visit_field(self, val):
         if isinstance(val, ast.AST):
             return self.visit(val)
         elif isinstance(val, list) or isinstance(val, tuple):
@@ -71,8 +71,18 @@ class DictExportVisitor:
 
     def visit_field_Num_n(self, val):
         if isinstance(val, int):
-            return {"ast_type": "int", "n": val}
+            return {
+                self.ast_type_field: "int",
+                "n": val
+            }
         elif isinstance(val, float):
-            return {"ast_type": "float", "n": val}
+            return {
+                self.ast_type_field: "float",
+                "n": val
+            }
         elif isinstance(val, complex):
-            return {"ast_type": "complex", "n": val.real, "i": val.imag}
+            return {
+                self.ast_type_field: "complex",
+                "n": val.real,
+                "i": val.imag
+            }
