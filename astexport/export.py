@@ -62,10 +62,10 @@ class DictExportVisitor:
 
     def visit_str(self, val):
         return str(val)
-    
+
     def visit_Bytes(self, val):
         return str(val.s)
-    
+
     def visit_NoneType(self, val):
         return None
 
