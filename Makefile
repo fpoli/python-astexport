@@ -1,11 +1,11 @@
 test:
-	python3.5 -m nose
+	python -m nose
 
 install:
-	python3.5 -m pip install . --upgrade
+	python -m pip install . --upgrade
 
 run-help:
-	python3.5 -m astexport --help
+	python -m astexport --help
 
 linter:
 	pep8 --ignore=E251 .
