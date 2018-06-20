@@ -56,7 +56,8 @@ class TestExportJson(unittest.TestCase):
                             "lineno": None,
                             "n": {
                                 "ast_type": "int",
-                                "n": 5
+                                "n": 5,
+                                "n_str": "5"
                             }
                         }
                     }
@@ -220,72 +221,5 @@ class TestExportJson(unittest.TestCase):
                 "name": "function",
                 "returns": None
             }
-        ),
-        TestIO(
-            input=ast.Module(
-                body=[
-                    ast.Assign(
-                        targets=[ast.Name(ctx=ast.Store(), id="x")],
-                        value=ast.Num(n=18446744073709551616),
-                    ),
-                    ast.Assign(
-                        targets=[ast.Name(ctx=ast.Store(), id="x")],
-                        value=ast.Num(n=-18446744073709551616),
-                    )
-                ]
-            ),
-            output={
-                "ast_type": "Module",
-                "body": [
-                    {
-                        "ast_type": "Assign",
-                        "targets": [
-                            {
-                                "ast_type": "Name",
-                                "id": "x",
-                                "ctx": {"ast_type": "Store"},
-                                "lineno": None,
-                                "col_offset": None,
-                            }
-                        ],
-                        "value": {
-                            "ast_type": "Num",
-                            "n": {
-                                "ast_type": "int",
-                                "n": 18446744073709551616,
-                                "n_str": "18446744073709551616",
-                            },
-                            "lineno": None,
-                            "col_offset": None,
-                        },
-                        "lineno": None,
-                        "col_offset": None,
-                    },
-                    {
-                        "ast_type": "Assign",
-                        "targets": [
-                            {
-                                "ast_type": "Name",
-                                "id": "x",
-                                "ctx": {"ast_type": "Store"},
-                                "lineno": None,
-                                "col_offset": None,
-                            }
-                        ],
-                        "value": {
-                            "ast_type": "Num",
-                            "n": {
-                                "ast_type": "int",
-                                "n": -18446744073709551616,
-                                "n_str": "-18446744073709551616",
-                            },
-                            "lineno": None,
-                            "col_offset": None,
-                        },
-                        "lineno": None,
-                        "col_offset": None,
-                    }
-                ],
-            },
         ),
     ]

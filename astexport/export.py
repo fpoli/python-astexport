@@ -2,10 +2,6 @@ import ast
 import json
 
 
-JAVASCRIPT_MAX_SAFE_INT = 2 ** 53 - 1
-JAVASCRIPT_MIN_SAFE_INT = -(2 ** 53 - 1)
-
-
 def export_json(tree, pretty_print=False):
     assert(isinstance(tree, ast.AST))
     return json.dumps(
@@ -78,15 +74,13 @@ class DictExportVisitor:
 
     def visit_field_Num_n(self, val):
         if isinstance(val, int):
-            data = {self.ast_type_field: "int", "n": val}
-
-            # JavaScript integers are limited to 2**53 - 1 bits,
-            # so we add a string representation of the integer
-            # if it's outside of the safe range
-            if val > JAVASCRIPT_MAX_SAFE_INT or val < JAVASCRIPT_MIN_SAFE_INT:
-                data["n_str"] = str(val)
-
-            return data
+            return {
+                self.ast_type_field: "int",
+                "n": val,
+                # JavaScript integers are limited to 2**53 - 1 bits,
+                # so we add a string representation of the integer
+                "n_str": str(val),
+            }
         elif isinstance(val, float):
             return {
                 self.ast_type_field: "float",
