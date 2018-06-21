@@ -56,7 +56,8 @@ class TestExportJson(unittest.TestCase):
                             "lineno": None,
                             "n": {
                                 "ast_type": "int",
-                                "n": 5
+                                "n": 5,
+                                "n_str": "5"
                             }
                         }
                     }
@@ -220,5 +221,5 @@ class TestExportJson(unittest.TestCase):
                 "name": "function",
                 "returns": None
             }
-        )
+        ),
     ]

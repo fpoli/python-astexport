@@ -76,7 +76,10 @@ class DictExportVisitor:
         if isinstance(val, int):
             return {
                 self.ast_type_field: "int",
-                "n": val
+                "n": val,
+                # JavaScript integers are limited to 2**53 - 1 bits,
+                # so we add a string representation of the integer
+                "n_str": str(val),
             }
         elif isinstance(val, float):
             return {
