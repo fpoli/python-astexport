@@ -3,7 +3,12 @@ import json
 
 
 def export_json(tree, pretty_print=False):
-    assert(isinstance(tree, ast.AST))
+    if not isinstance(tree, ast.AST):
+        raise ValueError(
+            "The argument of export_json(..) must be of type AST, not '{}'".format(
+                type(tree)
+            )
+        )
     return json.dumps(
         export_dict(tree),
         indent=4 if pretty_print else None,
@@ -13,7 +18,12 @@ def export_json(tree, pretty_print=False):
 
 
 def export_dict(tree):
-    assert(isinstance(tree, ast.AST))
+    if not isinstance(tree, ast.AST):
+        raise ValueError(
+            "The argument of export_dict(..) must be of type AST, not '{}'".format(
+                type(tree)
+            )
+        )
     return DictExportVisitor().visit(tree)
 
 
@@ -53,10 +63,9 @@ class DictExportVisitor:
     def default_visit_field(self, val):
         if isinstance(val, ast.AST):
             return self.visit(val)
-        elif isinstance(val, list) or isinstance(val, tuple):
+        if isinstance(val, (list, tuple)):
             return [self.visit(x) for x in val]
-        else:
-            return val
+        return val
 
     # Special visitors
 
@@ -67,6 +76,7 @@ class DictExportVisitor:
         return str(val.s)
 
     def visit_NoneType(self, val):
+        del val  # Unused
         return None
 
     def visit_field_NameConstant_value(self, val):
@@ -81,12 +91,12 @@ class DictExportVisitor:
                 # so we add a string representation of the integer
                 "n_str": str(val),
             }
-        elif isinstance(val, float):
+        if isinstance(val, float):
             return {
                 self.ast_type_field: "float",
                 "n": val
             }
-        elif isinstance(val, complex):
+        if isinstance(val, complex):
             return {
                 self.ast_type_field: "complex",
                 "n": val.real,
