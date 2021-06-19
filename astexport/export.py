@@ -65,6 +65,8 @@ class DictExportVisitor:
             return self.visit(val)
         if isinstance(val, (list, tuple)):
             return [self.visit(x) for x in val]
+        elif isinstance(val, bytes):
+            return val.decode('utf-8')
         return val
 
     # Special visitors
